@@ -1,57 +1,59 @@
 package ru.netology;
 
 public class MovieRepository {
-    private int id;
-    private int productId;
-    private String name;
-    private String genre;
-    private int cost;
+    private Movie[] repo;
+    public int Movies;
+    private Movie service;
 
-    public MovieRepository(int id, int productId, String name, String genre, int cost) {
-        this.id = id;
-        this.productId = productId;
-        this.name = name;
-        this.genre = genre;
-        this.cost = cost;
+    public MovieRepository() {
+        Movies = 10;
+        repo = new Movie[0];
     }
 
-    public int getId() {
-        return id;
+    public MovieRepository(int Movies) {
+        this.Movies = Movies;
+        repo = new Movie[Movies];
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void save(Movie film) {
+        Movie[] packs = new Movie[repo.length + 1];
+        for (int i = 0; i < repo.length; i++) {
+            packs[i] = repo[i];
+        }
+        packs[packs.length - 1] = film;
+        repo = packs;
     }
 
-    public int getProductId() {
-        return productId;
+    public Movie[] findAll() {
+        return repo;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void removeById(int id) {
+        Movie[] tmp = new Movie[repo.length - 1];
+        int copyToIndex = 0;
+        for (Movie item : repo) {
+            if (item == null || item.getId() != id) {
+                tmp[copyToIndex] = item;
+                copyToIndex++;
+            }
+        }
+        repo = tmp;
     }
 
-    public String getName() {
-        return name;
+    public Movie[] findById(int id) {
+        Movie[] tmp = new Movie[1];
+        int copyToIndex = 0;
+        for (Movie item : repo) {
+            if (item == null || item.getId() == id) {
+                tmp[copyToIndex] = item;
+                copyToIndex++;
+            }
+        }
+        repo = tmp;
+        return repo;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    public int getCost() {
-        return cost;
-    }
-
-    public void setCost(int cost) {
-        this.cost = cost;
+    public Movie[] removeAll() {
+        return repo = new Movie[] {};
     }
 }
