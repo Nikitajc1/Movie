@@ -1,46 +1,37 @@
 package ru.netology;
 
 public class MovieManager {
-
-    private int Movies;
-
     private MovieRepository service;
-    private MovieRepository[] repo;
+    public MovieManager(MovieRepository service) { this.service = service;}
 
-    public MovieManager() {
-        Movies = 10;
-        repo = new MovieRepository[0];
+    public void addNew(Movie film) {
+        service.save(film);
     }
 
-    public MovieManager(int Movies) {
-        this.Movies = Movies;
-        repo = new MovieRepository[Movies];
-    }
-
-    public void addNew(MovieRepository film) {
-        MovieRepository[] packs = new MovieRepository[repo.length + 1];
-        for (int i = 0; i < repo.length; i++) {
-            packs[i] = repo[i];
-        }
-        packs[packs.length - 1] = film;
-        repo = packs;
-    }
-
-    public MovieRepository[] findAll() {
-        return repo;
-    }
-
-    public MovieRepository[] findLast() {
+    public Movie[] findLast() {
         int resultLength;
-        if (Movies == 10) {
+        if (service.Movies == 10) {
             resultLength = 10;
         } else {
-            resultLength = Movies;
+            resultLength = service.Movies;
         }
-        MovieRepository[] result = new MovieRepository[resultLength];
+        Movie[] all = service.findAll();
+        Movie[] result = new Movie[resultLength];
         for (int i = 0; i < result.length; i++) {
-            result[i] = repo[repo.length - 1 - i];
+            result[i] = all[all.length - 1 - i];
         }
         return result;
+    }
+
+    public void removeManager(int film) {
+        service.removeById(film);
+    }
+
+    public Movie[] findManager(int film) {
+        return service.findById(film);
+    }
+
+    public Movie[] removeManager(){
+        return service.removeAll();
     }
 }
