@@ -24,26 +24,6 @@ public class MovieRepositoryAndManagerTest {
     MovieRepository film14 = new MovieRepository(7, 93, "Номер один", "комедия", 220);
     MovieRepository film15 = new MovieRepository(6, 41, "Тролли. Мировой тур", "мультфильм", 299);
 
-
-//    @BeforeEach
-//    public void setup() {
-//        service.addNew(film1);
-//        service.addNew(film2);
-//        service.addNew(film3);
-//        service.addNew(film4);
-//        service.addNew(film5);
-//        service.addNew(film6);
-//        service.addNew(film7);
-//        service.addNew(film8);
-//        service.addNew(film9);
-//        service.addNew(film10);
-//        service.addNew(film11);
-//        service.addNew(film12);
-//        service.addNew(film13);
-//        service.addNew(film14);
-//        service.addNew(film15);
-//    }
-
     @Test
     public void findAll() {
 
@@ -124,6 +104,44 @@ public class MovieRepositoryAndManagerTest {
         MovieRepository[] expected = {
                 film15, film14, film13, film12, film11, film10, film9, film8, film7, film6, film5, film4, film3, film2, film1
         };
+        MovieRepository[] actual = manager.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void findLast7With10Limit() {
+
+        MovieManager manager = new MovieManager(10);
+
+        manager.addNew(film1);
+        manager.addNew(film2);
+        manager.addNew(film3);
+        manager.addNew(film4);
+        manager.addNew(film5);
+        manager.addNew(film6);
+        manager.addNew(film7);
+
+        MovieRepository[] expected = {film7, film6, film5, film4, film3, film2, film1, null, null, null};
+        MovieRepository[] actual = manager.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void findLast7With5Limit() {
+
+        MovieManager manager = new MovieManager(5);
+
+        manager.addNew(film1);
+        manager.addNew(film2);
+        manager.addNew(film3);
+        manager.addNew(film4);
+        manager.addNew(film5);
+        manager.addNew(film6);
+        manager.addNew(film7);
+
+        MovieRepository[] expected = {film7, film6, film5, film4, film3};
         MovieRepository[] actual = manager.findLast();
 
         Assertions.assertArrayEquals(expected, actual);
