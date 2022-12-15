@@ -12,8 +12,8 @@ public class MovieManager {
         repo = new MovieRepository[0];
     }
 
-    public MovieManager(int Movies) {
-        this.Movies = Movies;
+    public MovieManager(int movies) {
+        this.Movies = movies;
         repo = new MovieRepository[Movies];
     }
 
