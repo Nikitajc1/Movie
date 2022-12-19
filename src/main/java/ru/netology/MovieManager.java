@@ -1,5 +1,8 @@
 package ru.netology;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MovieManager {
 
     private int Movies;
@@ -38,9 +41,19 @@ public class MovieManager {
             resultLength = Movies;
         }
         MovieRepository[] result = new MovieRepository[resultLength];
+        List<MovieRepository> resultList = new ArrayList<>();
         for (int i = 0; i < result.length; i++) {
             result[i] = repo[repo.length - 1 - i];
         }
-        return result;
+        for (int i = 0; i < result.length; i++){
+            if (result[i] != null) {
+                resultList.add(result[i]);
+            }
+        }
+        MovieRepository[] resultWithoutNull = new MovieRepository[resultList.size()];
+        for (int i = 0; i < resultList.size(); i++){
+            resultWithoutNull[i] = resultList.get(i);
+        }
+        return resultWithoutNull;
     }
 }

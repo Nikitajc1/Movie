@@ -122,7 +122,7 @@ public class MovieRepositoryAndManagerTest {
         manager.addNew(film6);
         manager.addNew(film7);
 
-        MovieRepository[] expected = {film7, film6, film5, film4, film3, film2, film1, null, null, null};
+        MovieRepository[] expected = {film7, film6, film5, film4, film3, film2, film1};
         MovieRepository[] actual = manager.findLast();
 
         Assertions.assertArrayEquals(expected, actual);
